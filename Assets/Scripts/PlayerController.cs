@@ -11,30 +11,48 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool isFacingRight = true;
 
     private bool isSprinting = false;
+    private bool isMoving = false;
+
+    private AudioSource FootSteps;
 
     private void Start()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
+        FootSteps = GetComponent<AudioSource>();
         CurrentSpeed = WalkSpeed;
     }
 
     private void Update()
     {
         move = Input.GetAxisRaw("Horizontal");
-
+        isMoving = false;
         if (move > 0f)
         {
+            isMoving = true;
             transform.localScale = new Vector3(1f, 1f, 1f);
             isFacingRight = true;
             Debug.Log(isFacingRight);
         }
         else if(move<0f)
         {
+            isMoving = true;
             transform.localScale = new Vector3(-1f, 1f, 1f);
             isFacingRight = false;
             Debug.Log(isFacingRight);
         }
 
+        if (isMoving)
+        {
+            if (!FootSteps.isPlaying)
+            {
+                PlayFootsteps();
+            }
+        }
+        else
+        {
+            StopFootsteps();
+        }
+        
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isSprinting = true;
@@ -64,5 +82,15 @@ public class PlayerController : MonoBehaviour
         {
             WalkSpeed = CurrentSpeed;
         }
+    }
+
+    private void PlayFootsteps()
+    {
+        FootSteps.Play();
+    }
+    
+    private void StopFootsteps()
+    {
+        FootSteps.Stop();
     }
 }

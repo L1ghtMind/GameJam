@@ -6,7 +6,7 @@ public class PlayerShoot : MonoBehaviour
 {
    [SerializeField] private float FireRate = 0.2f;
    [SerializeField] private Transform ShootPoint;
-   
+   [SerializeField] private AudioSource FireballSound;
    [SerializeField] private GameObject FireballPrefab;
 
    private float TimeUntilFire;
@@ -16,6 +16,7 @@ public class PlayerShoot : MonoBehaviour
    private void Start()
    {
       _PlayerController = GetComponent<PlayerController>();
+      FireballSound = GetComponent<AudioSource>();
    }
 
    private void Update()
@@ -29,6 +30,7 @@ public class PlayerShoot : MonoBehaviour
 
    void Shoot()
    {
+      FireballSound.Play();
       float Angle = _PlayerController.isFacingRight ? 0f : 180f;
       var temp = Instantiate(FireballPrefab, ShootPoint.position, 
             Quaternion.Euler(new Vector3(0f, 0f, Angle)));
