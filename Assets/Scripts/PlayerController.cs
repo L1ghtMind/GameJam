@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool isMoving = false;
 
     private AudioSource FootSteps;
+    [SerializeField] private Animator _Animator; 
 
     private void Start()
     {
@@ -25,18 +26,20 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         move = Input.GetAxisRaw("Horizontal");
+        _Animator.SetFloat("Speed", Mathf.Abs(move));
+        
         isMoving = false;
         if (move > 0f)
         {
             isMoving = true;
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
             isFacingRight = true;
             Debug.Log(isFacingRight);
         }
         else if(move<0f)
         {
             isMoving = true;
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            transform.localScale = new Vector3(-0.25f, 0.25f, 0.25f);
             isFacingRight = false;
             Debug.Log(isFacingRight);
         }
