@@ -8,6 +8,7 @@ TagManager:
   - Fireball
   - Ladder
   - Trapp
+  - Ghost
   layers:
   - Default
   - TransparentFX

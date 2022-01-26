@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\PlayerShoot.cs" />
      <Compile Include="Assets\Scripts\TrappConrtoller.cs" />
      <Compile Include="Assets\Scripts\LadderMovement.cs" />
+     <Compile Include="Assets\Scripts\GhostController.cs" />
  <Reference Include="UnityEngine">
  <HintPath>D:/Unity/2020.3.22f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
