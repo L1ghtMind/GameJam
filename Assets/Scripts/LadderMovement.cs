@@ -11,6 +11,7 @@ public class LadderMovement : MonoBehaviour
   private bool IsClimbing;
 
   [SerializeField] private Rigidbody2D PlayerRB;
+  [SerializeField] private AudioSource LadderSound;
 
   private void Update()
   {
@@ -18,6 +19,25 @@ public class LadderMovement : MonoBehaviour
     if (IsLadder && Mathf.Abs(Vertical) > 0f)
     {
       IsClimbing = true;
+    }
+
+    if (IsClimbing && Vertical>0)
+    {
+      if (!LadderSound.isPlaying)
+      {
+        PlaySound();
+      }
+    }
+    else if (IsClimbing && Vertical<0)
+    {
+      if (!LadderSound.isPlaying)
+      {
+        PlaySound();
+      }
+    }
+    else
+    {
+      StopSound();
     }
   }
 
@@ -49,5 +69,15 @@ public class LadderMovement : MonoBehaviour
       IsLadder = false;
       IsClimbing = false;
     }
+  }
+  
+  private void PlaySound()
+  {
+    LadderSound.Play();
+  }
+  
+  private void StopSound()
+  {
+    LadderSound.Stop();
   }
 }
